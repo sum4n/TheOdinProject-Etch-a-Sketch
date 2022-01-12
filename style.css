@@ -17,3 +17,7 @@
     border: 1px solid orange;
     width: 50px;
 }
+
+.blackBg {
+    background-color: black;
+}
