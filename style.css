@@ -1,0 +1,19 @@
+.parentDiv {
+    /* border: 1px solid black; */
+    height: 800px;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+}
+
+.childDiv {
+    /* border: 1px solid red; */
+    height: 50px;
+    /* width: 50px; */
+    display: flex;
+}
+
+.grandChildDiv {
+    border: 1px solid orange;
+    width: 50px;
+}
