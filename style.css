@@ -1,23 +1,44 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .parentDiv {
-    /* border: 1px solid black; */
-    height: 800px;
-    width: 800px;
+    border: 1px solid black;
+    height: 720px;
+    width: 720px;
     display: flex;
     flex-direction: column;
 }
 
 .childDiv {
     /* border: 1px solid red; */
-    height: 50px;
-    /* width: 50px; */
     display: flex;
+    flex: 1;
 }
 
 .grandChildDiv {
     border: 1px solid orange;
-    width: 50px;
+    /* flex-grow: 1 or flex: 1 makes the item consume free space */
+    flex: 1;
 }
 
 .blackBg {
     background-color: black;
+}
+
+button {
+    background-color: rgb(37, 175, 218);
+    border: none;
+    border-radius: 4px;
+    color: white;
+    padding: 12px 32px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+
+}
+
+#reset-button {
+    display: flex;
+    justify-content: center;
 }

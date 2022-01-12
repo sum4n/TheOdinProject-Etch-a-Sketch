@@ -1,43 +1,69 @@
 const body = document.querySelector('body');
 
-const parentDiv = document.createElement('div');
-parentDiv.classList.add("parentDiv");
+makeGrid(16);
+makeDivBlack();
 
-let idCounter = 0;
+function makeGrid(gridSquares) {
+    const parentDiv = document.createElement('div');
+    parentDiv.classList.add("parentDiv");
+    body.appendChild(parentDiv);
 
-for (let i = 0; i < 16; i++) {
-    const childDiv = addChildDiv();
-    for (let j = 0; j < 16; j++) {
-        idCounter += 1;
-        addGrandChildDiv(childDiv, j, idCounter);
-        // grandChildDiv.textContent = j;
+    for (let i = 0; i < gridSquares; i++) {
+        const childDiv = addChildDiv(parentDiv);
+        for (let j = 0; j < gridSquares; j++) {
+            addGrandChildDiv(childDiv);
+        }
     }
 }
 
-body.appendChild(parentDiv);
-
-function addChildDiv() {
+function addChildDiv(parentDiv) {
     const childDiv = document.createElement('div');
     childDiv.classList.add("childDiv");
-    // childDiv.textContent = i;
     parentDiv.appendChild(childDiv);
     return childDiv;
 }
 
-function addGrandChildDiv(childDiv, j, idCounter) {
+function addGrandChildDiv(childDiv) {
     const grandChildDiv = document.createElement('div');
     grandChildDiv.classList.add("grandChildDiv");
-    grandChildDiv.textContent = idCounter;
-    // created div gets id.
-    grandChildDiv.id = idCounter;
     childDiv.appendChild(grandChildDiv);
 }
 
+// divs get black bg on mouseover
+function makeDivBlack() {
+    const grandChildDivs = document.querySelectorAll('.grandChildDiv');
 
-const grandChildDivs = document.querySelectorAll('.grandChildDiv');
-
-grandChildDivs.forEach((div) => {
-    div.addEventListener('mouseover', () => {
-        div.classList.add("blackBg");
+    grandChildDivs.forEach((div) => {
+        div.addEventListener('mouseover', () => {
+            div.classList.add("blackBg");
+        });
     });
+}
+
+// reset button
+const resetButton = document.getElementById('reset-button');
+resetButton.addEventListener('click', () => {
+    resetColor();
+    // document.querySelector('.parentDiv').remove();
+    makeGrid(promptNumberOfSquares());
+    makeDivBlack();
 });
+
+const resetColor = () => {
+    const grandChildDivs = document.querySelectorAll('.grandChildDiv');
+    grandChildDivs.forEach((div) => {
+        div.classList.remove("blackBg");
+    });
+}
+
+const promptNumberOfSquares = () => {
+    let squareNum;
+    do {
+        squareNum = Number(prompt("Grid of how many squares: (1-64)"));
+        console.log(squareNum);
+    } while (squareNum < 1 || squareNum > 64 || isNaN(squareNum));
+
+    document.querySelector('.parentDiv').remove();
+
+    return squareNum;
+}
