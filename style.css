@@ -18,14 +18,17 @@ body {
 }
 
 .grandChildDiv {
-    border: 1px solid orange;
+    /* border: 1px solid orange; */
     /* flex-grow: 1 or flex: 1 makes the item consume free space */
     flex: 1;
 }
 
-.blackBg {
+/* .blackBg {
     background-color: black;
 }
+.blueBg {
+    background-color: blue;
+} */
 
 button {
     background-color: rgb(37, 175, 218);
@@ -35,10 +38,11 @@ button {
     padding: 12px 32px;
     margin-top: 5px;
     margin-bottom: 10px;
-
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
-#reset-button {
+.buttons-div {
     display: flex;
     justify-content: center;
 }

@@ -1,7 +1,8 @@
 const body = document.querySelector('body');
 
 makeGrid(16);
-makeDivBlack();
+let colorName = "black";
+makeDivBlack(colorName);
 
 function makeGrid(gridSquares) {
     const parentDiv = document.createElement('div');
@@ -30,23 +31,36 @@ function addGrandChildDiv(childDiv) {
 }
 
 // divs get black bg on mouseover
-function makeDivBlack() {
+function makeDivBlack(colorName) {
     const grandChildDivs = document.querySelectorAll('.grandChildDiv');
 
     grandChildDivs.forEach((div) => {
         div.addEventListener('mouseover', () => {
-            div.classList.add("blackBg");
+            // div.classList.add(colorName);
+            if (colorName == "black") {
+                div.style.background = colorName;
+            } else {
+                div.style.background = getRandomColor();
+            }
+            
         });
     });
+}
+
+const getRandomColor = () => {
+    let redColor = Math.floor(Math.random() * 256);
+    let greenColor = Math.floor(Math.random() * 256);
+    let blueColor = Math.floor(Math.random() * 256);
+    let randomColor = "rgb(" + redColor + "," + greenColor + "," + blueColor + ")";
+    return randomColor;
 }
 
 // reset button
 const resetButton = document.getElementById('reset-button');
 resetButton.addEventListener('click', () => {
     resetColor();
-    // document.querySelector('.parentDiv').remove();
     makeGrid(promptNumberOfSquares());
-    makeDivBlack();
+    makeDivBlack(colorName);
 });
 
 const resetColor = () => {
@@ -59,11 +73,17 @@ const resetColor = () => {
 const promptNumberOfSquares = () => {
     let squareNum;
     do {
-        squareNum = Number(prompt("Grid of how many squares: (1-64)"));
-        console.log(squareNum);
+        squareNum = Number(prompt("Grid of how many squares: (1-64)", 16));
     } while (squareNum < 1 || squareNum > 64 || isNaN(squareNum));
 
     document.querySelector('.parentDiv').remove();
 
     return squareNum;
 }
+
+// RGB button
+const rgbButton = document.getElementById("rgb-button");
+
+rgbButton.addEventListener('click', () => {
+    makeDivBlack("red");
+});
