@@ -30,27 +30,6 @@ function addGrandChildDiv(childDiv) {
     childDiv.appendChild(grandChildDiv);
 }
 
-// divs get black bg on mouseover
-// function colorTheDivs(colorName) {
-//     const grandChildDivs = document.querySelectorAll('.grandChildDiv');
-
-//     grandChildDivs.forEach((div) => {
-//         div.addEventListener('mouseover', () => {
-//             // console.log(div.getAttribute('style').slice(18, 22));
-//             console.log(div.style.backgroundColor);
-//             if (colorName == "black") {
-//                 div.style.backgroundColor = colorName;
-//                 //div.classList.add("colored");
-//             } else if (colorName == "random") {
-//                 div.style.backgroundColor = getRandomColor();
-//                 // div.classList.add("colored");
-//                 console.log("Red: " + div.style.backgroundColor);
-//             } 
-            
-//         });
-//     });
-// }
-
 const grandChildDivs = document.querySelectorAll('.grandChildDiv');
 
 grandChildDivs.forEach((div) => {
