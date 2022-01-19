@@ -1,6 +1,7 @@
 const body = document.querySelector('body');
 
-makeGrid(16);
+let squareNum = 16;
+makeGrid(squareNum);
 let colorName = "black";
 
 function makeGrid(number) {
@@ -100,9 +101,8 @@ resetButton.addEventListener('click', () => {
 });
 
 const promptNumberOfSquares = () => {
-    let squareNum;
     do {
-        squareNum = Number(prompt("Grid of square divs: (1-100)", 16));
+        squareNum = Number(prompt("Grid of square divs: (1-100)", squareNum));
         // console.log(squareNum);
         if (squareNum === 0) {return "cancled";}
     } while (squareNum < 1 || squareNum > 100 || isNaN(squareNum));
