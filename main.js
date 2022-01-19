@@ -2,7 +2,7 @@ const body = document.querySelector('body');
 
 makeGrid(16);
 let colorName = "black";
-makeDivBlack(colorName);
+//colorTheDivs(colorName);
 
 function makeGrid(gridSquares) {
     const parentDiv = document.createElement('div');
@@ -31,21 +31,45 @@ function addGrandChildDiv(childDiv) {
 }
 
 // divs get black bg on mouseover
-function makeDivBlack(colorName) {
-    const grandChildDivs = document.querySelectorAll('.grandChildDiv');
+// function colorTheDivs(colorName) {
+//     const grandChildDivs = document.querySelectorAll('.grandChildDiv');
 
-    grandChildDivs.forEach((div) => {
-        div.addEventListener('mouseover', () => {
-            // div.classList.add(colorName);
-            if (colorName == "black") {
-                div.style.background = colorName;
-            } else {
-                div.style.background = getRandomColor();
-            }
+//     grandChildDivs.forEach((div) => {
+//         div.addEventListener('mouseover', () => {
+//             // console.log(div.getAttribute('style').slice(18, 22));
+//             console.log(div.style.backgroundColor);
+//             if (colorName == "black") {
+//                 div.style.backgroundColor = colorName;
+//                 //div.classList.add("colored");
+//             } else if (colorName == "random") {
+//                 div.style.backgroundColor = getRandomColor();
+//                 // div.classList.add("colored");
+//                 console.log("Red: " + div.style.backgroundColor);
+//             } 
             
-        });
+//         });
+//     });
+// }
+
+const grandChildDivs = document.querySelectorAll('.grandChildDiv');
+
+grandChildDivs.forEach((div) => {
+    div.addEventListener('mouseover', () => {
+        // console.log(div.getAttribute('style').slice(18, 22));
+        // console.log(div.style.backgroundColor);
+        if (!(div.style.backgroundColor) || div.style.backgroundColor == "black") {
+            if (colorName == "black") {
+            div.style.backgroundColor = colorName;
+            console.log(div.style.backgroundColor);
+            //div.classList.add("colored");
+            } else if (colorName == "random") {
+            div.style.backgroundColor = getRandomColor();
+            // div.classList.add("colored");
+            console.log(div.style.backgroundColor);
+            } 
+        }  
     });
-}
+});
 
 const getRandomColor = () => {
     let redColor = Math.floor(Math.random() * 256);
@@ -60,7 +84,8 @@ const resetButton = document.getElementById('reset-button');
 resetButton.addEventListener('click', () => {
     resetColor();
     makeGrid(promptNumberOfSquares());
-    makeDivBlack(colorName);
+    colorName = "black";
+    colorTheDivs(colorName);
 });
 
 const resetColor = () => {
@@ -85,5 +110,6 @@ const promptNumberOfSquares = () => {
 const rgbButton = document.getElementById("rgb-button");
 
 rgbButton.addEventListener('click', () => {
-    makeDivBlack("red");
+    colorName = "random";
+    //colorTheDivs(colorName);
 });
