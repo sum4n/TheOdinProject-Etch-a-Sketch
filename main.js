@@ -3,14 +3,14 @@ const body = document.querySelector('body');
 makeGrid(16);
 let colorName = "black";
 
-function makeGrid(gridSquares) {
+function makeGrid(number) {
     const parentDiv = document.createElement('div');
     parentDiv.classList.add("parentDiv");
     body.appendChild(parentDiv);
 
-    for (let i = 0; i < gridSquares; i++) {
+    for (let i = 0; i < number; i++) {
         const childDiv = addChildDiv(parentDiv);
-        for (let j = 0; j < gridSquares; j++) {
+        for (let j = 0; j < number; j++) {
             addGrandChildDiv(childDiv);
         }
     }
@@ -38,10 +38,10 @@ function triggerMouseOver() {
             if (!(div.style.backgroundColor) || div.style.backgroundColor == "black") {
                 if (colorName == "black") {
                 div.style.backgroundColor = colorName;
-                console.log(div.style.backgroundColor);
+                // console.log(div.style.backgroundColor);
                 } else if (colorName == "random") {
                 div.style.backgroundColor = getRandomColor();
-                console.log(div.style.backgroundColor);
+                // console.log(div.style.backgroundColor);
                 } 
             } else {
                 // console.log(div.style.backgroundColor);
@@ -75,8 +75,8 @@ const darkenRGB = (rgbValue) => {
 }
 
 const addBlack = (color) => {
-    // This function keep decreasing colors by 10% till it
-    // becomes completely black rgb(0, 0, 0).
+    // This function keep decreasing colors by 10% of 256 
+    // till it becomes completely black. rgb(0, 0, 0).
     // 25.6 is 10% of 256 which is a rgb value's highest number.
     if (color - 25.6 < 0) {
         color = 0;
@@ -89,17 +89,23 @@ const addBlack = (color) => {
 // reset button
 const resetButton = document.getElementById('reset-button');
 resetButton.addEventListener('click', () => {
-    makeGrid(promptNumberOfSquares());
-    colorName = "black";
+    // makeGrid(promptNumberOfSquares());
+    let numGrid = promptNumberOfSquares();
+    if (!(numGrid === "cancled")) {
+        makeGrid(numGrid);
+        document.querySelector('.parentDiv').remove();
+        colorName = "black";
+    }
+    
 });
 
 const promptNumberOfSquares = () => {
     let squareNum;
     do {
-        squareNum = Number(prompt("Grid of how many squares: (1-100)", 16));
+        squareNum = Number(prompt("Grid of square divs: (1-100)", 16));
+        // console.log(squareNum);
+        if (squareNum === 0) {return "cancled";}
     } while (squareNum < 1 || squareNum > 100 || isNaN(squareNum));
-
-    document.querySelector('.parentDiv').remove();
 
     return squareNum;
 }
