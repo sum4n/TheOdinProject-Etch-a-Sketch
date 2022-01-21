@@ -102,9 +102,15 @@ resetButton.addEventListener('click', () => {
 
 const promptNumberOfSquares = () => {
     do {
+        let previousNum = squareNum;
         squareNum = Number(prompt("Grid of square divs: (1-100)", squareNum));
         // console.log(squareNum);
-        if (squareNum === 0) {return "cancled";}
+        if (squareNum === 0) {
+            // On prompt cancel populates default prompt value with previous value instead of 0.
+            squareNum = previousNum;
+            
+            return "cancled";
+        }
     } while (squareNum < 1 || squareNum > 100 || isNaN(squareNum));
 
     return squareNum;
